@@ -79,7 +79,7 @@
 
 - [ ] Stripe 帳號設定
 - [ ] 訂閱方案：基礎版 NT$390 / 月、專業版 NT$990 / 月
-- [ ] 授權流程（plan → feature gating）
+- [x] 授權流程（plan → feature gating）
 - [ ] 免費試用 14 天
 - [ ] 付款成功／失敗 Webhook 處理
 - [ ] 訂閱管理頁
