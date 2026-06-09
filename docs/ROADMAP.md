@@ -57,7 +57,7 @@
 
 - [ ] 每日凌晨 2:00 Cron Job（Celery beat）
 - [ ] 讀取各貼文留言、回覆、按讚數
-- [ ] 互動數據存入資料庫
+- [x] 互動數據存入資料庫（MetricRecord model + /api/v1/analytics/metrics CRUD）
 - [ ] 備份檔同步更新互動記錄
 - [x] 貼文數據看板（基礎版）（✅ AnalyticsDashboard 元件含測試）
 
