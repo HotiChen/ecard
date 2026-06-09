@@ -61,6 +61,44 @@ def write_proof_file(proof: ProofResult, filepath: Path) -> Path:
     return filepath
 
 
+@dataclass
+class MetricsSnapshot:
+    likes: int = 0
+    comments: int = 0
+    replies: int = 0
+    reposts: int = 0
+    views: int = 0
+
+    @property
+    def total_interactions(self) -> int:
+        return self.likes + self.comments + self.replies + self.reposts
+
+
+def read_proof_file(filepath: Path) -> dict:
+    """讀取已寫入的存證 JSON 檔，回傳原始 dict。"""
+    filepath = Path(filepath)
+    if not filepath.exists():
+        raise FileNotFoundError(f"Proof file not found: {filepath}")
+    return json.loads(filepath.read_text(encoding="utf-8"))
+
+
+def update_proof_with_metrics(filepath: Path, metrics: MetricsSnapshot) -> None:
+    """在既有存證檔中加入 metrics 欄位（保留 sha256 等原有欄位不變）。"""
+    filepath = Path(filepath)
+    if not filepath.exists():
+        raise FileNotFoundError(f"Proof file not found: {filepath}")
+    data = json.loads(filepath.read_text(encoding="utf-8"))
+    data["metrics"] = {
+        "likes": metrics.likes,
+        "comments": metrics.comments,
+        "replies": metrics.replies,
+        "reposts": metrics.reposts,
+        "views": metrics.views,
+        "total_interactions": metrics.total_interactions,
+    }
+    filepath.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
 async def backup_to_drive(proof: ProofResult, filename: str) -> dict:
     """把存證 payload 上傳到 Google Drive，回傳 {drive_file_id, drive_file_url}。
 
