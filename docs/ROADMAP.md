@@ -78,7 +78,7 @@
 ## Week 7 — 金流與訂閱
 
 - [ ] Stripe 帳號設定
-- [ ] 訂閱方案：基礎版 NT$390 / 月、專業版 NT$990 / 月
+- [x] 訂閱方案：/api/v1/subscription GET + cancel + _seed（SubscriptionRecord model）
 - [x] 授權流程（plan → feature gating）
 - [x] 免費試用 14 天
 - [x] 付款成功／失敗 Webhook 處理

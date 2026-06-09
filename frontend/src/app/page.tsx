@@ -1,13 +1,26 @@
+'use client'
+
+import { useState } from 'react'
+import { NavBar, Tab } from '@/components/NavBar'
 import { ComposePage } from '@/components/ComposePage'
+import { SchedulePage } from '@/components/SchedulePage'
+import { AnalyticsDashboard } from '@/components/AnalyticsDashboard'
+import { SubscriptionPage } from '@/components/SubscriptionPage'
 
 export default function Home() {
+  const [tab, setTab] = useState<Tab>('compose')
+
   return (
     <main className="mx-auto max-w-2xl px-6 py-12">
-      <h1 className="text-3xl font-bold tracking-tight mb-2">📷 PhotoFlow AI</h1>
-      <p className="text-sm text-neutral-500 mb-10">
+      <h1 className="text-3xl font-bold tracking-tight mb-1">📷 PhotoFlow AI</h1>
+      <p className="text-sm text-neutral-500 mb-6">
         多平台發文、自動備份與 AI 內容分析平台
       </p>
-      <ComposePage />
+      <NavBar active={tab} onNavigate={setTab} />
+      {tab === 'compose' && <ComposePage />}
+      {tab === 'schedule' && <SchedulePage />}
+      {tab === 'analytics' && <AnalyticsDashboard />}
+      {tab === 'subscription' && <SubscriptionPage />}
     </main>
   )
 }
