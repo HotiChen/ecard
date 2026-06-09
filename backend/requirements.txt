@@ -1,0 +1,29 @@
+# --- Web framework ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.1
+
+# --- Database ---
+sqlalchemy==2.0.36
+psycopg[binary]==3.2.3
+alembic==1.14.0
+
+# --- Background tasks / scheduling ---
+celery==5.4.0
+redis==5.2.1
+
+# --- External APIs ---
+httpx==0.28.1                 # Meta / X / 通用 HTTP
+google-api-python-client==2.157.0   # Google Drive
+google-auth-oauthlib==1.2.1
+anthropic==0.42.0             # Claude API
+stripe==11.4.0
+
+# --- Utils ---
+python-multipart==0.0.20      # 檔案上傳
+python-jose[cryptography]==3.3.0  # JWT
+
+# --- Dev / test ---
+pytest==8.3.4
+pytest-asyncio==0.25.0
