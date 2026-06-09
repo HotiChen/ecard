@@ -55,7 +55,7 @@
 
 ## Week 5 — 互動數據同步
 
-- [ ] 每日凌晨 2:00 Cron Job（Celery beat）
+- [x] 每日凌晨 2:00 Cron Job — 觸發邏輯（get_due_schedules + mark_schedule_executed）
 - [ ] 讀取各貼文留言、回覆、按讚數
 - [x] 互動數據存入資料庫（MetricRecord model + /api/v1/analytics/metrics CRUD）
 - [x] 備份檔同步更新互動記錄（update_proof_with_metrics + MetricsSnapshot）
