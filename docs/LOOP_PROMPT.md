@@ -48,3 +48,37 @@ claude/project-review-corrections-b8lkqt 分支。
 
 - 新視窗記得切到同一分支,並先安裝後端套件,否則第一批會卡在缺套件。
 - Sonnet 4.6 跑 TDD 很合適;若遇到較複雜的架構決策,可手動切回 Opus 處理完再續。
+
+---
+
+# 📦 下一批:前端 UI + mock 版 Claude 功能
+
+> 後端純邏輯已大致寫完(108 測試綠)。這批專攻**還能無人值守寫、不需真實金鑰**的部分:
+> 前端頁面(對著 mock API)與 Claude 分析功能(用 mock 的 Anthropic client)。
+
+開始前:`cd frontend && npm install`;後端已裝好則免。
+
+## 直接貼這段
+
+```
+依 TDD 連續開發 PhotoFlow AI 的「前端 + mock 版 AI」,直到卡關或完成約 3–5 個子任務:
+範圍只限以下、且不需真實 API 金鑰的工作:
+- 前端(frontend/, Next.js + Tailwind):W3 發文編輯區、平台多選、一鍵發布 UI、
+  發布後備份確認訊息;W4 排程管理頁;W5 數據看板頁。所有對後端的呼叫先打到
+  mock(MSW 或 fetch mock),不連真實後端。
+- 後端 Claude 功能(W6):留言情緒分析、每週週報、下一篇建議。用 mock 的
+  Anthropic client 注入,只測「prompt 組裝」與「回應解析」邏輯,不發真實請求。
+
+每個子任務的循環:
+(1) 讀 docs/ROADMAP.md,從上述範圍挑下一個還沒打勾的最小子任務。
+(2) 嚴格 TDD:先寫一個會失敗的測試並確認紅燈——前端用 Vitest + React Testing
+Library(第一次需先把測試環境設好並加到 package.json 的 test script);後端沿用
+pytest。再寫最少的程式讓它綠燈,必要時重構,全程保持其他測試也綠。
+(3) 全綠後把該任務在 ROADMAP 打勾,用清楚訊息 git commit,push 到
+claude/project-review-corrections-b8lkqt 分支。
+(4) 接著做下一個,重複以上。完成約 3–5 個、或卡在需要真實金鑰/人工的步驟時停下,
+回報這輪做了什麼、下一步卡在哪。結束前絕不留紅燈或無法編譯的程式碼;後端 108 個
+既有測試必須仍全綠。
+```
+
+要做下一批時一樣回 **`繼續`**,或把整段再貼一次。
