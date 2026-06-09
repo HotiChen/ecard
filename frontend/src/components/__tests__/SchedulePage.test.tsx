@@ -28,6 +28,15 @@ const SCHEDULED_POSTS = [
   },
 ]
 
+const EXECUTED_POST = {
+  id: 3,
+  content: '夜景攝影特輯',
+  platforms: ['threads'],
+  scheduled_at: '2026-06-14T08:00:00Z',
+  is_canceled: false,
+  executed_at: '2026-06-14T08:01:00Z',
+}
+
 describe('SchedulePage — 排程任務管理', () => {
   it('renders the page heading', () => {
     mockFetch.mockResolvedValue({ ok: true, json: async () => [] })
@@ -70,6 +79,33 @@ describe('SchedulePage — 排程任務管理', () => {
     await waitFor(() =>
       expect(screen.getByText(/已取消/)).toBeInTheDocument()
     )
+  })
+
+  it('shows executed badge for executed posts', async () => {
+    mockFetch.mockResolvedValue({ ok: true, json: async () => [EXECUTED_POST] })
+    render(<SchedulePage />)
+    await waitFor(() =>
+      expect(screen.getByText(/已發布/)).toBeInTheDocument()
+    )
+  })
+
+  it('renders a refresh button', async () => {
+    mockFetch.mockResolvedValue({ ok: true, json: async () => [] })
+    render(<SchedulePage />)
+    await waitFor(() =>
+      expect(screen.getByRole('button', { name: /重新整理/ })).toBeInTheDocument()
+    )
+  })
+
+  it('re-fetches list when refresh button is clicked', async () => {
+    mockFetch.mockResolvedValue({ ok: true, json: async () => [] })
+    const user = userEvent.setup()
+    render(<SchedulePage />)
+    await waitFor(() =>
+      expect(screen.getByRole('button', { name: /重新整理/ })).toBeInTheDocument()
+    )
+    await user.click(screen.getByRole('button', { name: /重新整理/ }))
+    expect(mockFetch).toHaveBeenCalledTimes(2)
   })
 
   it('calls cancel API when cancel button is clicked', async () => {

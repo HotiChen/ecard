@@ -65,7 +65,7 @@
 
 ## Week 6 — Claude AI 分析引擎
 
-- [ ] Claude API 串接（`claude-opus-4-8` / `claude-sonnet-4-6`）
+- [x] Claude API 串接骨架（ClaudeClientProtocol + get_claude_client DI + /api/v1/ai 端點）
 - [x] 最佳發文時段分析
 - [x] 內容類型分析
 - [x] 留言情緒分析

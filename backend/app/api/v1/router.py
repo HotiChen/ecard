@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter
 
-from app.api.v1.endpoints import analytics, health, posts, schedules, subscription
+from app.api.v1.endpoints import ai, analytics, health, posts, schedules, subscription
 
 api_router = APIRouter()
 api_router.include_router(health.router, tags=["health"])
@@ -10,3 +10,4 @@ api_router.include_router(posts.router, prefix="/posts", tags=["posts"])
 api_router.include_router(schedules.router, prefix="/schedules", tags=["schedules"])
 api_router.include_router(analytics.router, prefix="/analytics", tags=["analytics"])
 api_router.include_router(subscription.router, prefix="/subscription", tags=["subscription"])
+api_router.include_router(ai.router, prefix="/ai", tags=["ai"])

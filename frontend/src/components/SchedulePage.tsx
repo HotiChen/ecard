@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 interface ScheduledPost {
   id: number
@@ -17,7 +17,8 @@ export function SchedulePage() {
   const [posts, setPosts] = useState<ScheduledPost[]>([])
   const [loadState, setLoadState] = useState<LoadState>('loading')
 
-  useEffect(() => {
+  const fetchPosts = useCallback(() => {
+    setLoadState('loading')
     fetch('/api/v1/schedules')
       .then((res) => res.json())
       .then((data) => {
@@ -26,6 +27,8 @@ export function SchedulePage() {
       })
       .catch(() => setLoadState('error'))
   }, [])
+
+  useEffect(() => { fetchPosts() }, [fetchPosts])
 
   async function cancelPost(id: number) {
     await fetch(`/api/v1/schedules/${id}/cancel`, { method: 'POST' })
@@ -36,7 +39,15 @@ export function SchedulePage() {
 
   return (
     <div className="flex flex-col gap-6 p-6">
-      <h1 className="text-xl font-bold">排程管理</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-xl font-bold">排程管理</h1>
+        <button
+          onClick={fetchPosts}
+          className="rounded border border-gray-300 px-3 py-1 text-xs text-gray-600 hover:bg-gray-50"
+        >
+          重新整理
+        </button>
+      </div>
 
       {loadState === 'loading' && (
         <p className="text-sm text-gray-500">載入中...</p>
