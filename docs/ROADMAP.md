@@ -23,7 +23,7 @@
 
 - [x] FastAPI 後端環境建置（✅ 骨架已建）
 - [ ] Google Drive API 串接 OAuth 2.0
-- [ ] 建立發文內容資料庫模型（PostgreSQL，✅ 模型骨架已建）
+- [x] 建立發文內容資料庫模型（PostRecord + /api/v1/posts → SHA-256 存證回傳）
 - [ ] 實作：發文 → 自動備份到 Google Drive
 - [x] 實作：SHA-256 時間戳記存證檔自動生成
 - [x] 單元測試：發文、備份、存證三個流程都跑得通
