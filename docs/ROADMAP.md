@@ -21,7 +21,7 @@
 
 ## Week 2 — 核心備份引擎
 
-- [ ] FastAPI 後端環境建置（✅ 骨架已建）
+- [x] FastAPI 後端環境建置（✅ 骨架已建）
 - [ ] Google Drive API 串接 OAuth 2.0
 - [ ] 建立發文內容資料庫模型（PostgreSQL，✅ 模型骨架已建）
 - [ ] 實作：發文 → 自動備份到 Google Drive
