@@ -13,6 +13,7 @@ import hashlib
 import json
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from pathlib import Path
 
 
 @dataclass
@@ -40,6 +41,24 @@ def build_proof(content: str, metadata: dict | None = None) -> ProofResult:
     return ProofResult(
         sha256=digest, proof_timestamp=timestamp, payload_bytes=payload_bytes
     )
+
+
+def write_proof_file(proof: ProofResult, filepath: Path) -> Path:
+    """把存證資料寫成 JSON 檔（.proof.json）。
+
+    檔案內容包含 sha256、proof_timestamp 與 payload（UTF-8 字串）。
+    可用 sha256(payload.encode()) 重新驗證雜湊，確保未竄改。
+    """
+    data = {
+        "sha256": proof.sha256,
+        "proof_timestamp": proof.proof_timestamp,
+        "payload": proof.payload_bytes.decode("utf-8"),
+    }
+    filepath = Path(filepath)
+    filepath.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    return filepath
 
 
 async def backup_to_drive(proof: ProofResult, filename: str) -> dict:
