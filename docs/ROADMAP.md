@@ -46,7 +46,7 @@
 ## Week 4 — 排程發文
 
 - [x] 日期時間選擇元件
-- [ ] 排程任務存入資料庫（✅ `ScheduledPost` 模型骨架已建）
+- [x] 排程任務存入資料庫（ScheduleEntry model + /api/v1/schedules CRUD）
 - [ ] Celery + Redis 排程引擎建置
 - [x] 排程發文自動執行測試
 - [x] 排程任務管理頁
