@@ -2,9 +2,11 @@
 
 import { useState } from 'react'
 import { NavBar, Tab } from '@/components/NavBar'
-import { ComposePage } from '@/components/ComposePage'
-import { SchedulePage } from '@/components/SchedulePage'
+import { AiAnalysisPage } from '@/components/AiAnalysisPage'
 import { AnalyticsDashboard } from '@/components/AnalyticsDashboard'
+import { ComposePage } from '@/components/ComposePage'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { SchedulePage } from '@/components/SchedulePage'
 import { SubscriptionPage } from '@/components/SubscriptionPage'
 
 export default function Home() {
@@ -17,10 +19,13 @@ export default function Home() {
         多平台發文、自動備份與 AI 內容分析平台
       </p>
       <NavBar active={tab} onNavigate={setTab} />
-      {tab === 'compose' && <ComposePage />}
-      {tab === 'schedule' && <SchedulePage />}
-      {tab === 'analytics' && <AnalyticsDashboard />}
-      {tab === 'subscription' && <SubscriptionPage />}
+      <ErrorBoundary>
+        {tab === 'compose' && <ComposePage />}
+        {tab === 'schedule' && <SchedulePage />}
+        {tab === 'analytics' && <AnalyticsDashboard />}
+        {tab === 'ai' && <AiAnalysisPage />}
+        {tab === 'subscription' && <SubscriptionPage />}
+      </ErrorBoundary>
     </main>
   )
 }

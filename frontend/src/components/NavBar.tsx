@@ -1,6 +1,6 @@
 'use client'
 
-export type Tab = 'compose' | 'schedule' | 'analytics' | 'subscription'
+export type Tab = 'compose' | 'schedule' | 'analytics' | 'ai' | 'subscription'
 
 interface NavBarProps {
   active: Tab
@@ -11,6 +11,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: 'compose', label: '發文' },
   { id: 'schedule', label: '排程' },
   { id: 'analytics', label: '數據' },
+  { id: 'ai', label: 'AI 分析' },
   { id: 'subscription', label: '訂閱' },
 ]
 
